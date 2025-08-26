@@ -1,34 +1,51 @@
-# AngularJS with .NET Framework
-A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
+# AngularJS Spring Boot Application
+
+This is a sample application demonstrating the integration of AngularJS with Spring Boot, migrated from ASP.NET MVC 5.
 
 ## Features
 
-- XLTS for AngularJS - installed using npm
-- jQuery 3.6.3 - installed using npm
-- .NET Framework 4.8
-- ASP.NET MVC 5
-- Bundling using [Microsoft.AspNet.Web.Optimization](https://docs.microsoft.com/en-us/aspnet/mvc/overview/performance/bundling-and-minification)
+- AngularJS frontend with XLTS.dev for extended support
+- Spring Boot 3.1.5 with Java 17
+- Spring MVC for web layer
+- Thymeleaf templating engine
+- Gradle build system with frontend plugin
 
 ## Prerequisites
 
-- Windows 10/11 - Older versions of Windows may work but have not been tested.
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) - The free *Community Edition* is sufficient.
-Older versions of Visual Studio may work but have not been tested.
-- [.Net Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework) - This can optionally be installed
-as part of the Visual Studio 2022 installation as well.
+- Java 17 or later
+- Node.js 18+ (for frontend dependencies)
 
 ## Getting Started
-- Make sure you have configured your authentication with the XLTS.dev registry by supplying your token in the `.npmrc` file in your user home directory.
 
-  > **Note**
-  > If you don't have a token for the XLTS.dev registry, you can use the LTS AngularJS packages - see the next section.
+1. Clone the repository
+2. Run `./gradlew build` to build the application and install frontend dependencies
+3. Run `./gradlew bootRun` to start the application
+4. Open your browser to `http://localhost:8080`
 
-- Clone repository: `git clone https://github.com/xlts-dev/angularjs-asp-net48-mvc5.git`.
-- Switch to the project's directory: `cd angularjs-asp-net48-mvc5`.
-- Install npm packages: `npm install`.
-- Open the project in Visual Studio.
-- Run the project by pressing the `F5` key or using the green start button in the toolbar. This will launch your web
-  browser and display the web application.
+## Frontend Dependencies
+
+The application uses npm for managing frontend dependencies. The main dependencies include:
+- AngularJS (via XLTS.dev)
+- jQuery
+
+## Build System
+
+The application uses Gradle with the following key features:
+- Spring Boot plugin for packaging and running
+- Node.js plugin for frontend dependency management
+- Automatic copying of frontend assets to static resources
+
+## Testing
+
+Run tests using:
+```bash
+./gradlew test
+```
+
+The application includes:
+- Spring Boot unit tests
+- Controller integration tests
+- Playwright for end-to-end testing (frontend)
 
 ## AngularJS LTS packages
 If you want to use the LTS packages, you have to run `npm run switch-to-lts-packages` script instead of `npm install`.

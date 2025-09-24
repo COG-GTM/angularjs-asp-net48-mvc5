@@ -3,19 +3,6 @@ using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddWebOptimizer(pipeline =>
-{
-    pipeline.AddJavaScriptBundle("/bundles/scripts.js",
-        "node_modules/jquery/dist/jquery.min.js",
-        "node_modules/angular/angular.min.js",
-        "WebApp/app.js",
-        "WebApp/Components/*.js",
-        "WebApp/Directives/*.js");
-
-    pipeline.AddCssBundle("/bundles/styles.css",
-        "Content/*.css",
-        "WebApp/**/*.css");
-});
 
 var app = builder.Build();
 
@@ -37,8 +24,6 @@ if (app.Environment.IsDevelopment())
         RequestPath = "/node_modules"
     });
 }
-
-app.UseWebOptimizer();
 
 app.UseRouting();
 

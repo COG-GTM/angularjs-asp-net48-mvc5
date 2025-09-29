@@ -1,16 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace asp_net_angularjs.Controllers
 {
-  public class LandingController : Controller
-  {
-    public ActionResult Index()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class LandingController : ControllerBase
     {
-      return View();
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new { message = "ASP.NET Core 7 Web API is running", timestamp = DateTime.UtcNow });
+        }
+
+        [HttpGet("health")]
+        public IActionResult Health()
+        {
+            return Ok(new { status = "healthy", service = "angularjs-aspnetcore-webapi" });
+        }
     }
-  }
 }

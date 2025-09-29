@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>asp_net_angularjs</RootNamespace>
+    <AssemblyName>asp-net-angularjs-core</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="App_Start/**" />
+    <Compile Remove="Global.asax.cs" />
+    <Compile Remove="Controllers/LandingController.cs" />
+    <Compile Remove="Properties/**" />
+    <Content Remove="Views/**" />
+    <Content Remove="Global.asax" />
+    <Content Remove="Web.config" />
+    <Content Remove="Web.*.config" />
+    <Content Remove="packages.config" />
+    <None Remove="Views/**" />
+    <None Remove="packages.config" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,116 @@
+# Migration Diagram: ASP.NET MVC 5 to ASP.NET Core 7 Web API
+
+## Before: ASP.NET MVC 5 (.NET Framework 4.8)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│                 ASP.NET MVC 5 Application                   │
+│                                                             │
+├─────────────┬─────────────────────────┬───────────────────┤
+│             │                         │                   │
+│  Global.asax│     Web.config          │  App_Start        │
+│  (App Start)│  (Configuration)        │  (Routing/Bundles)│
+│             │                         │                   │
+├─────────────┼─────────────────────────┼───────────────────┤
+│             │                         │                   │
+│             │                         │                   │
+│  Controllers│        Views            │    Models         │
+│             │                         │                   │
+│  ┌─────────┐│  ┌─────────────────┐    │                   │
+│  │Landing  ││  │Landing/Index.cshtml  │                   │
+│  │Controller││  │(Razor View)     │    │                   │
+│  └─────────┘│  └─────────────────┘    │                   │
+│             │                         │                   │
+└─────────────┴─────────────────────────┴───────────────────┘
+        │                                       ▲
+        │       Server-side Rendering           │
+        ▼                                       │
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│                  AngularJS Frontend                         │
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │  WebApp/    │  │  Content/   │  │  node_modules/      │  │
+│  │  app.js     │  │  site.css   │  │  (jQuery/AngularJS) │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## After: ASP.NET Core 7 Web API (.NET 8.0)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│               ASP.NET Core 7 Web API                        │
+│                                                             │
+├─────────────┬─────────────────────────┬───────────────────┤
+│             │                         │                   │
+│  Program.cs │   appsettings.json      │  Static Files     │
+│  (App Start)│   (Configuration)       │  Middleware       │
+│             │                         │                   │
+├─────────────┼─────────────────────────┼───────────────────┤
+│             │                         │                   │
+│             │                         │                   │
+│  Controllers│     wwwroot             │    CORS Policy    │
+│             │                         │                   │
+│  ┌─────────┐│  ┌─────────────────┐    │  ┌─────────────┐  │
+│  │ApiContr.││  │index.html       │    │  │AllowAngularJS│  │
+│  │LandingApi││  │(Static HTML)    │    │  │              │  │
+│  └─────────┘│  └─────────────────┘    │  └─────────────┘  │
+│             │                         │                   │
+└─────────────┴─────────────────────────┴───────────────────┘
+        │                                       ▲
+        │       JSON API + Static Files         │
+        ▼                                       │
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│                  AngularJS Frontend                         │
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │  WebApp/    │  │  Content/   │  │  node_modules/      │  │
+│  │  app.js     │  │  site.css   │  │  (jQuery/AngularJS) │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Key Changes
+
+1. **Project Structure**:
+   - Replaced legacy `.csproj` with SDK-style project format
+   - Migrated from .NET Framework 4.8 to .NET 8.0
+   - Replaced NuGet packages with .NET Core equivalents
+
+2. **Configuration**:
+   - Replaced `Web.config` with `appsettings.json`
+   - Configured middleware in `Program.cs` instead of `Global.asax`
+   - Added CORS policy for frontend communication
+
+3. **Controllers**:
+   - Converted MVC Controllers to API Controllers
+   - Changed from returning Views to returning JSON data
+   - Added `[ApiController]` attribute
+
+4. **Frontend Integration**:
+   - Replaced server-side Razor views with static HTML
+   - Configured static file middleware to serve frontend assets
+   - Implemented CORS to allow API communication
+
+5. **Bundling/Minification**:
+   - Removed `BundleConfig.cs` bundling
+   - Directly referenced individual files in HTML
+
+## Technology Stack Comparison
+
+| Component | Before | After |
+|-----------|--------|-------|
+| Framework | .NET Framework 4.8 | .NET 8.0 |
+| Web Framework | ASP.NET MVC 5 | ASP.NET Core 7 Web API |
+| Configuration | Web.config | appsettings.json |
+| Startup | Global.asax | Program.cs |
+| Controllers | MVC Controllers | API Controllers |
+| Views | Razor Views | Static HTML |
+| Frontend | AngularJS | AngularJS (unchanged) |
+| Communication | Server-side rendering | JSON API + CORS |

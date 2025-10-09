@@ -1,6 +1,8 @@
 # AngularJS with .NET Framework
 A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
 
+<!-- Test comment for PR workflow verification -->
+
 ## Features
 
 - XLTS for AngularJS - installed using npm

@@ -370,3 +370,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# .NET Core
+bin/
+obj/
+*.user
+.vs/

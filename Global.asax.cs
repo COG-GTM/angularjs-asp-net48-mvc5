@@ -1,6 +1,5 @@
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Optimization;
 
 namespace asp_net_angularjs
 {
@@ -10,7 +9,6 @@ namespace asp_net_angularjs
     {
       AreaRegistration.RegisterAllAreas();
       RouteConfig.RegisterRoutes(RouteTable.Routes);
-      BundleConfig.RegisterBundles(BundleTable.Bundles);
     }
   }
 }

@@ -12,26 +12,26 @@
 
   <!-- 
     Migration Notes:
-    - Converted from .NET Framework 4.8 to .NET 8.0
+    - Converted from .NET Framework 4.8 to .NET 8 (Core)
     - Converted from packages.config to PackageReference format
     - SDK-style project uses implicit file inclusion (no need to list individual files)
-    - Some packages have been updated or replaced for .NET 8 compatibility
+    - Some packages have been updated or replaced for .NET Core compatibility
   -->
 
   <ItemGroup>
-    <!-- Newtonsoft.Json - Compatible with .NET 8, updated to latest version -->
+    <!-- Newtonsoft.Json - Compatible with .NET Core, updated to latest version -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <!-- 
-    Packages removed during migration (not compatible with .NET 8 or replaced by built-in features):
+    Packages removed during migration (not compatible with .NET Core or replaced by built-in features):
     - Antlr 3.5.0.2 - Not needed for this project
     - Microsoft.AspNet.Mvc 5.2.7 - Replaced by ASP.NET Core MVC (built into SDK)
     - Microsoft.AspNet.Razor 3.2.7 - Replaced by ASP.NET Core Razor (built into SDK)
     - Microsoft.AspNet.Web.Optimization 1.1.3 - Will need alternative bundling solution
     - Microsoft.AspNet.WebPages 3.2.7 - Replaced by ASP.NET Core (built into SDK)
-    - Microsoft.CodeDom.Providers.DotNetCompilerPlatform 3.6.0 - Not needed in .NET 8
-    - Microsoft.Web.Infrastructure 1.0.0.0 - Not needed in .NET 8
+    - Microsoft.CodeDom.Providers.DotNetCompilerPlatform 3.6.0 - Not needed in .NET Core
+    - Microsoft.Web.Infrastructure 1.0.0.0 - Not needed in .NET Core
     - WebGrease 1.5.2 - Will need alternative minification solution
   -->
 

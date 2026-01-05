@@ -130,6 +130,9 @@ ipch/
 /playwright-report/
 /playwright/.cache/
 
+# Karma coverage reports
+/coverage/
+
 # TFS 2012 Local Workspace
 $tf/
 

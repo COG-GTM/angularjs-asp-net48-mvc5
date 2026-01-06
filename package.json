@@ -22,14 +22,17 @@
     }
   ],
   "license": "MIT",
-  "scripts": {
-    "e2e": "playwright test",
-    "e2e:debug": "playwright test --project chromium --headed",
-    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html}\"",
-    "update": "ncu -u",
-    "switch-to-lts-packages": "npm i --save angular@1.8.3",
-    "prepare": "npx playwright install"
-  },
+    "scripts": {
+      "test": "karma start karma.conf.js",
+      "test:watch": "karma start karma.conf.js --auto-watch --no-single-run",
+      "test:coverage": "karma start karma.conf.js --reporters progress,coverage",
+      "e2e": "playwright test",
+      "e2e:debug": "playwright test --project chromium --headed",
+      "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html}\"",
+      "update": "ncu -u",
+      "switch-to-lts-packages": "npm i --save angular@1.8.3",
+      "prepare": "npx playwright install"
+    },
   "engines": {
     "node": ">=18",
     "npm": ">=9"
@@ -40,6 +43,12 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.30.0",
+    "angular-mocks": "^1.8.3",
+    "jasmine-core": "^5.13.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
     "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.3"
   }

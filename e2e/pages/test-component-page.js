@@ -1,9 +1,9 @@
 export class TestComponentPage {
   page;
-  angularjsVersion;
+  reactVersion;
 
   constructor(page) {
     this.page = page;
-    this.angularjsVersion = page.getByTestId('angularjs-version');
+    this.reactVersion = page.getByTestId('react-version');
   }
 }

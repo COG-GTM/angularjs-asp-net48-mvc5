@@ -98,19 +98,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\site.css" />
-    <Content Include="Global.asax" />
-    <None Include="packages.config" />
-    <None Include="README.md" />
-    <None Include="LICENSE" />
-    <Content Include="WebApp\Components\test.component.css" />
-    <Content Include="WebApp\Components\test.component.js" />
-    <Content Include="WebApp\Directives\test.directive.html" />
-    <Content Include="WebApp\Directives\test.directive.js" />
-    <Content Include="WebApp\app.js" />
-    <Content Include="Web.config" />
-    <Content Include="WebApp\Directives\test.directive.css" />
-  </ItemGroup>
+      <Content Include="Content\site.css" />
+      <Content Include="Global.asax" />
+      <None Include="packages.config" />
+      <None Include="README.md" />
+      <None Include="LICENSE" />
+      <Content Include="WebApp\React\App.tsx" />
+      <Content Include="WebApp\React\App.css" />
+      <Content Include="WebApp\React\main.tsx" />
+      <Content Include="WebApp\React\TestComponent.tsx" />
+      <Content Include="index.html" />
+      <Content Include="Web.config" />
+      <None Include="vite.config.ts" />
+      <None Include="tsconfig.json" />
+      <None Include="tsconfig.node.json" />
+    </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

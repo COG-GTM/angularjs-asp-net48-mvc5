@@ -4,6 +4,6 @@ export class TestDirectivePage {
 
   constructor(page) {
     this.page = page;
-    this.jqueryVersion = page.getByTestId('jquery-version');
+    this.jqueryVersion = page.getByTestId("jquery-version");
   }
 }

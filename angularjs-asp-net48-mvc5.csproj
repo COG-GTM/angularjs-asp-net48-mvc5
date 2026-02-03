@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.248" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="WebApp\**\*" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Content\**\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

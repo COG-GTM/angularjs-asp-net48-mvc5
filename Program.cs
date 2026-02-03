@@ -1,22 +1,9 @@
+using Microsoft.Extensions.FileProviders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddControllersWithViews();
-
-// Configure WebOptimizer for bundling
-builder.Services.AddWebOptimizer(pipeline =>
-{
-    pipeline.AddJavaScriptBundle("/bundles/scripts.js",
-        "node_modules/jquery/dist/jquery.min.js",
-        "node_modules/angular/angular.min.js",
-        "WebApp/app.js",
-        "WebApp/Components/**/*.js",
-        "WebApp/Directives/**/*.js");
-
-    pipeline.AddCssBundle("/bundles/styles.css",
-        "Content/**/*.css",
-        "WebApp/**/*.css");
-});
 
 var app = builder.Build();
 
@@ -28,8 +15,31 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseWebOptimizer();
-app.UseStaticFiles();
+
+// Serve static files from multiple directories
+var contentRoot = builder.Environment.ContentRootPath;
+
+// Serve node_modules
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(contentRoot, "node_modules")),
+    RequestPath = "/node_modules"
+});
+
+// Serve WebApp directory
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(contentRoot, "WebApp")),
+    RequestPath = "/WebApp"
+});
+
+// Serve Content directory
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(contentRoot, "Content")),
+    RequestPath = "/Content"
+});
+
 app.UseRouting();
 app.UseAuthorization();
 

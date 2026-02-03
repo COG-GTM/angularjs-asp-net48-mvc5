@@ -16,19 +16,27 @@ describe('testComponent', function() {
       ctrl = $componentController('testComponent', { $log: $log });
     });
 
+    // Ensures the TestComponent controller is properly instantiated
+    // when the component is created via dependency injection.
     it('should be defined', function() {
       expect(ctrl).toBeDefined();
     });
 
+    // Validates that the controller exposes the current AngularJS version
+    // by reading from angular.version.full, which is displayed in the UI.
     it('should have version property set to angular.version.full', function() {
       expect(ctrl.version).toBe(angular.version.full);
     });
 
+    // Confirms the $onInit lifecycle hook is defined as a function,
+    // which AngularJS calls after the component's bindings are initialized.
     it('should have $onInit method defined', function() {
       expect(ctrl.$onInit).toBeDefined();
       expect(typeof ctrl.$onInit).toBe('function');
     });
 
+    // Verifies that the $onInit lifecycle hook logs an initialization message
+    // using the $log service for debugging and monitoring purposes.
     it('should log info message on $onInit', function() {
       spyOn($log, 'info');
       ctrl.$onInit();
@@ -45,6 +53,8 @@ describe('testComponent', function() {
       $rootScope = _$rootScope_;
     }));
 
+    // Tests that the component's inline template correctly renders the AngularJS
+    // version string by compiling the component and checking the DOM output.
     it('should render the angularjs version in the template', function() {
       var element = $compile('<test-component></test-component>')($rootScope);
       $rootScope.$digest();
@@ -53,6 +63,8 @@ describe('testComponent', function() {
       expect(content).toContain(angular.version.full);
     });
 
+    // Ensures the component includes a data-testid attribute for E2E test
+    // selectors, enabling reliable element targeting in Playwright tests.
     it('should have data-testid attribute for testing', function() {
       var element = $compile('<test-component></test-component>')($rootScope);
       $rootScope.$digest();

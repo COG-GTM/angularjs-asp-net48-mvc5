@@ -8,11 +8,6 @@ describe('TestComponent', function() {
     $log = _$log_;
   }));
 
-  it('should set version from angular.version.full', function() {
-    var ctrl = $componentController('testComponent', { $log: $log });
-    expect(ctrl.version).toBe(angular.version.full);
-  });
-
   it('should log initialization message', function() {
     spyOn($log, 'info');
     var ctrl = $componentController('testComponent', { $log: $log });

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>XLTS for AngularJS with Spring Boot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/site.css}"/>
+    <link rel="stylesheet" th:href="@{/WebApp/Components/test.component.css}"/>
+    <link rel="stylesheet" th:href="@{/WebApp/Directives/test.directive.css}"/>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/angular.min.js}"></script>
+    <script th:src="@{/WebApp/app.js}"></script>
+    <script th:src="@{/WebApp/Components/test.component.js}"></script>
+    <script th:src="@{/WebApp/Directives/test.directive.js}"></script>
+</head>
+<body ng-app="app">
+    <h1 data-testid="title">XLTS for AngularJS with Spring Boot</h1>
+    <test-directive></test-directive>
+    <test-component></test-component>
+</body>
+</html>

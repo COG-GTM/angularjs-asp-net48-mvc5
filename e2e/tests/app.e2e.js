@@ -18,12 +18,12 @@ test.describe('angularjs-asp-net48-mvc5 app', () => {
   test('TestComponent', async ({ page }) => {
     const testComponentPage = new TestComponentPage(page);
 
-    await expect(testComponentPage.angularjsVersion).toHaveText('AngularJS Version: 1.8.2');
+    await expect(testComponentPage.angularjsVersion).toHaveText('AngularJS Version: 1.8.3');
   });
 
   test('TestDirective', async ({ page }) => {
     const testDirective = new TestDirectivePage(page);
 
-    await expect(testDirective.jqueryVersion).toHaveText('jQuery Version: 3.6.0');
+    await expect(testDirective.jqueryVersion).toHaveText('jQuery Version: 3.7.0');
   });
 });

@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.github.node-gradle.node' version '7.0.1'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+node {
+    version = '18.19.0'
+    npmVersion = '10.2.3'
+    download = true
+    workDir = file("${project.projectDir}/.gradle/nodejs")
+    npmWorkDir = file("${project.projectDir}/.gradle/npm")
+    nodeProjectDir = file("${project.projectDir}")
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task npmInstallDeps(type: NpmTask) {
+    args = ['install']
+}
+
+task copyNodeModules(type: Copy) {
+    dependsOn npmInstallDeps
+    from 'node_modules'
+    into 'src/main/resources/static/node_modules'
+    include 'angular/**'
+    include 'jquery/**'
+}
+
+task copyWebApp(type: Copy) {
+    from 'WebApp'
+    into 'src/main/resources/static/WebApp'
+}
+
+task copyContent(type: Copy) {
+    from 'Content'
+    into 'src/main/resources/static/Content'
+}
+
+task buildFrontend {
+    dependsOn copyNodeModules, copyWebApp, copyContent
+}
+
+processResources {
+    dependsOn buildFrontend
+}
+
+bootRun {
+    dependsOn buildFrontend
+}

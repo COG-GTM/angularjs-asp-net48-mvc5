@@ -28,7 +28,9 @@
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html}\"",
     "update": "ncu -u",
     "switch-to-lts-packages": "npm i --save angular@1.8.3",
-    "prepare": "npx playwright install"
+    "prepare": "npx playwright install",
+    "test": "karma start karma.conf.js",
+    "test:coverage": "karma start karma.conf.js"
   },
   "engines": {
     "node": ">=18",
@@ -40,6 +42,12 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.30.0",
+    "angular-mocks": "^1.8.3",
+    "jasmine-core": "^6.0.1",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
     "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.3"
   }

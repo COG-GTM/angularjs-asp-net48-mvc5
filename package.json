@@ -23,6 +23,8 @@
   ],
   "license": "MIT",
   "scripts": {
+    "test": "karma start karma.conf.js",
+    "test:watch": "karma start karma.conf.js --no-single-run --auto-watch",
     "e2e": "playwright test",
     "e2e:debug": "playwright test --project chromium --headed",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html}\"",
@@ -40,6 +42,13 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.30.0",
+    "angular-mocks": "^1.8.3",
+    "jasmine-core": "^6.0.1",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-jasmine": "^5.1.0",
     "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.3"
   }

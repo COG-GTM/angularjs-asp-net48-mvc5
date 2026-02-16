@@ -370,3 +370,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# React frontend build output
+/wwwroot/
+
+# Frontend dependencies
+/frontend/node_modules/

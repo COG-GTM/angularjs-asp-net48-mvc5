@@ -1,0 +1,16 @@
+{
+  "name": "aspnetcore-angularjs-app",
+  "version": "1.0.0",
+  "description": "ASP.NET Core 8 application with AngularJS frontend",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run copy-libs",
+    "copy-libs": "npm run copy-jquery && npm run copy-angular",
+    "copy-jquery": "cp node_modules/jquery/dist/jquery.min.js wwwroot/lib/jquery/",
+    "copy-angular": "cp node_modules/angular/angular.min.js wwwroot/lib/angular/"
+  },
+  "dependencies": {
+    "angular": "^1.8.3",
+    "jquery": "^3.6.3"
+  }
+}

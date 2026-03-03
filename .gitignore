@@ -370,3 +370,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Angular build output
+/dist/
+/out-tsc/
+/.angular/

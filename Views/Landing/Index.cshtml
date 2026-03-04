@@ -1,5 +1,3 @@
-
-@using System.Web.Optimization
 @{
     Layout = null;
 }
@@ -15,12 +13,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  @Styles.Render("~/bundles/styles")
-  @Scripts.Render("~/bundles/scripts")
+  <link rel="stylesheet" href="~/Content/app/browser/styles.css" />
 </head>
-<body ng-app="app">
-  <h1 data-testid="title">XLTS for AngularJS with .NET Framework</h1>
-  <test-directive></test-directive>
-  <test-component></test-component>
+<body>
+  <app-root></app-root>
+  <script src="~/Content/app/browser/main.js"></script>
 </body>
 </html>

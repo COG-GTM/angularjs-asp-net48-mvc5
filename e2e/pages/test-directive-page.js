@@ -1,9 +1,9 @@
 export class TestDirectivePage {
   page;
-  jqueryVersion;
+  angularVersion;
 
   constructor(page) {
     this.page = page;
-    this.jqueryVersion = page.getByTestId('jquery-version');
+    this.angularVersion = page.getByTestId('angular-version-directive');
   }
 }

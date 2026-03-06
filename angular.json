@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "Content/app",
+            "outputPath": "wwwroot/app",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [

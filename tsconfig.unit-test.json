@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "vitest/globals"
+    ]
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/components/**/*.spec.ts",
+    "src/app/components/**/*.ts",
+    "tests/**/*.spec.ts"
+  ],
+  "exclude": [
+    "src/app/app.ts",
+    "src/app/app.spec.ts",
+    "src/app/app.module.ts"
+  ]
+}

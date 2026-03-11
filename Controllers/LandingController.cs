@@ -1,16 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace asp_net_angularjs.Controllers
 {
-  public class LandingController : Controller
-  {
-    public ActionResult Index()
+    public class LandingController : Controller
     {
-      return View();
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View();
+        }
     }
-  }
 }

@@ -1,0 +1,59 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.5'
+    id 'io.spring.dependency-management' version '1.1.3'
+    id 'java'
+    id 'com.github.node-gradle.node' version '7.0.1'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+node {
+    version = '18.17.0'
+    npmVersion = '9.6.7'
+    download = true
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task copyNodeModules(type: Copy) {
+    from 'node_modules'
+    into 'src/main/resources/static/node_modules'
+    dependsOn npmInstall
+}
+
+task copyWebApp(type: Copy) {
+    from 'WebApp'
+    into 'src/main/resources/static/WebApp'
+}
+
+task copyContent(type: Copy) {
+    from 'Content'
+    into 'src/main/resources/static/css'
+}
+
+processResources {
+    dependsOn copyNodeModules, copyWebApp, copyContent
+}
+
+bootRun {
+    dependsOn processResources
+}

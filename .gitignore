@@ -371,6 +371,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# ASP.NET Core
+appsettings.Development.json
+
 # Angular build output
 /dist/
 /out-tsc/

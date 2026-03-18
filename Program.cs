@@ -14,7 +14,7 @@ public class Program
 
         if (!app.Environment.IsDevelopment())
         {
-            app.UseExceptionHandler("/Home/Error");
+            app.UseExceptionHandler("/Landing/Error");
             app.UseHsts();
         }
 

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.FileProviders;
+
 namespace asp_net_angularjs;
 
 public class Program
@@ -5,10 +7,6 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        // Serve static files from the project root (Content/ directory lives here,
-        // not in the default wwwroot/ folder).
-        builder.Environment.WebRootPath = builder.Environment.ContentRootPath;
 
         builder.Services.AddControllersWithViews();
 
@@ -19,7 +17,18 @@ public class Program
             app.UseHsts();
         }
 
-        app.UseStaticFiles();
+        // Serve only the Content/ directory as static files.
+        // The Angular build output lives in Content/app/ and site.css is in Content/.
+        var contentPath = Path.Combine(app.Environment.ContentRootPath, "Content");
+        if (Directory.Exists(contentPath))
+        {
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(contentPath),
+                RequestPath = "/Content"
+            });
+        }
+
         app.UseRouting();
 
         app.MapControllerRoute(

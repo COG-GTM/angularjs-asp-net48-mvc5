@@ -13,6 +13,8 @@ import { version as reactVersion } from 'react';
 interface TestComponentProps {
   /** Framework version string to display. Defaults to React.version. */
   version?: string;
+  /** Label to display before the version. Defaults to "React" when using the React version fallback. */
+  label?: string;
 }
 
 /**
@@ -22,8 +24,10 @@ interface TestComponentProps {
  *
  * Displays the framework version information.
  */
-export const TestComponent: React.FC<TestComponentProps> = ({ version }) => {
+export const TestComponent: React.FC<TestComponentProps> = ({ version, label }) => {
+  const isAngularVersion = version !== undefined;
   const displayVersion = version ?? reactVersion;
+  const displayLabel = label ?? (isAngularVersion ? 'Angular' : 'React');
 
   // ngOnInit equivalent: log when the component mounts
   useEffect(() => {
@@ -32,7 +36,7 @@ export const TestComponent: React.FC<TestComponentProps> = ({ version }) => {
 
   return (
     <div data-testid="angular-version" className="test-component">
-      Angular Version: {displayVersion}
+      {displayLabel} Version: {displayVersion}
     </div>
   );
 };

@@ -375,4 +375,4 @@ FodyWeavers.xsd
 /dist/
 /out-tsc/
 /.angular/
-/Content/app/
+/wwwroot/Content/app/

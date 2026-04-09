@@ -32,3 +32,5 @@ as part of the Visual Studio 2022 installation as well.
 
 ## AngularJS LTS packages
 If you want to use the LTS packages, you have to run `npm run switch-to-lts-packages` script instead of `npm install`.
+
+<!-- Integration test: validated Devin push access 2026-04-09T00:57:05Z -->

@@ -1,6 +1,7 @@
+using Microsoft.Extensions.FileProviders;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
-builder.Environment.WebRootPath = builder.Environment.ContentRootPath;
 
 var app = builder.Build();
 
@@ -11,7 +12,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+// Serve Angular CLI build output from Content/app/browser/ at ~/Content/app/browser/
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "Content")),
+    RequestPath = "/Content"
+});
+
 app.UseRouting();
 app.UseAuthorization();
 

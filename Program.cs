@@ -1,11 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Environment.WebRootPath = builder.Environment.ContentRootPath;
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Landing/Error");
     app.UseHsts();
 }
 

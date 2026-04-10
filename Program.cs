@@ -14,10 +14,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Serve Angular CLI build output from Content/app/browser/ at ~/Content/app/browser/
+var contentPath = Path.Combine(builder.Environment.ContentRootPath, "Content");
+Directory.CreateDirectory(contentPath);
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(builder.Environment.ContentRootPath, "Content")),
+    FileProvider = new PhysicalFileProvider(contentPath),
     RequestPath = "/Content"
 });
 

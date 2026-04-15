@@ -1,0 +1,9 @@
+node_modules/
+bin/
+obj/
+.git/
+.angular/
+wwwroot/
+Content/
+test-results/
+playwright-report/

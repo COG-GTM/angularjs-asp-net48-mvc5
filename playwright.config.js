@@ -36,7 +36,7 @@ const config = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.BASE_URL || "http://localhost:4200/",
+    baseURL: process.env.BASE_URL || "http://localhost:5000/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -101,9 +101,10 @@ const config = {
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run start",
-    url: "http://localhost:4200/",
+    command: "npx ng build --configuration production && dotnet run --urls http://localhost:5000",
+    url: "http://localhost:5000/",
     reuseExistingServer: !process.env.CI,
+    timeout: 120000,
   },
 };
 

@@ -1,18 +1,10 @@
 import { TestBed } from "@angular/core/testing";
-import { RouterModule } from "@angular/router";
 import { App } from "./app";
-import { TestComponent } from "./components/test/test.component";
-import { TestDirectiveComponent } from "./components/test-directive/test-directive.component";
 
 describe("App", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [App],
-      imports: [
-        RouterModule.forRoot([]),
-        TestComponent,
-        TestDirectiveComponent,
-      ],
+      imports: [App],
     }).compileComponents();
   });
 

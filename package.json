@@ -1,26 +1,11 @@
 {
-  "name": "angularjs-asp-net48-mvc5",
-  "version": "1.0.0",
-  "description": "A project using Angular, .NET Framework 4.8, and ASP.NET MVC 5.",
+  "name": "modern-app",
+  "version": "2.0.0",
+  "description": "Modern full-stack app: ASP.NET Core 9 backend with SQLite + Angular 21 frontend with CRUD GUI",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xlts-dev/angularjs-asp-net48-mvc5"
+    "url": "https://github.com/COG-GTM/angularjs-asp-net48-mvc5"
   },
-  "author": {
-    "name": "XLTS.dev",
-    "email": "support@xlts.dev",
-    "url": "https://xlts.dev/angularjs"
-  },
-  "contributors": [
-    {
-      "name": "Jaroslaw Zolnowski",
-      "email": "jarek@xlts.dev"
-    },
-    {
-      "name": "Ed Clement",
-      "email": "ed@xlts.dev"
-    }
-  ],
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -31,6 +16,7 @@
     "test": "ng test",
     "e2e": "playwright test",
     "e2e:debug": "playwright test --project chromium --headed",
+    "start:api": "dotnet run --project ModernApp.csproj --urls http://localhost:5000",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html}\"",
     "update": "ncu -u",
     "prepare": "npx playwright install"
@@ -48,7 +34,8 @@
     "@angular/platform-browser-dynamic": "^21.2.0",
     "@angular/router": "^21.2.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.1"
   },
   "devDependencies": {
     "@angular/build": "^21.2.0",

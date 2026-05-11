@@ -1,16 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using asp_net_angularjs.Configuration;
 
-namespace asp_net_angularjs.Controllers
+namespace asp_net_angularjs.Controllers;
+
+public class LandingController : Controller
 {
-  public class LandingController : Controller
-  {
-    public ActionResult Index()
+    private readonly AppSettings _settings;
+
+    public LandingController(IOptions<AppSettings> settings)
     {
-      return View();
+        _settings = settings.Value;
     }
-  }
+
+    public IActionResult Index()
+    {
+        ViewData["Title"] = _settings.Title;
+        return View();
+    }
 }

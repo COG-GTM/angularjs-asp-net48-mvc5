@@ -1,0 +1,12 @@
+**/.git
+**/bin
+**/obj
+**/node_modules
+**/.angular
+**/packages
+**/e2e
+**/*.md
+**/.editorconfig
+**/.gitignore
+**/terraform
+**/Tests

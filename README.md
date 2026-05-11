@@ -1,34 +1,132 @@
-# AngularJS with .NET Framework
-A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
+# Angular + ASP.NET Core 8
+
+A demo project using Angular 21 with ASP.NET Core 8 (MVC). Migrated from .NET Framework 4.8 / ASP.NET MVC 5.
 
 ## Features
 
-- XLTS for AngularJS - installed using npm
-- jQuery 3.6.3 - installed using npm
-- .NET Framework 4.8
-- ASP.NET MVC 5
-- Bundling using [Microsoft.AspNet.Web.Optimization](https://docs.microsoft.com/en-us/aspnet/mvc/overview/performance/bundling-and-minification)
+- ASP.NET Core 8 with MVC controllers
+- Angular 21 frontend (compiled via Angular CLI)
+- Configuration via `appsettings.json` and the Options pattern
+- Dockerfile with multi-stage build (Node + .NET)
+- Docker Compose for local containerized deployment
+- Terraform IaC for AWS ECS Fargate with ALB and VPC
+- xUnit unit and integration tests
 
 ## Prerequisites
 
-- Windows 10/11 - Older versions of Windows may work but have not been tested.
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) - The free *Community Edition* is sufficient.
-Older versions of Visual Studio may work but have not been tested.
-- [.Net Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework) - This can optionally be installed
-as part of the Visual Studio 2022 installation as well.
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Node.js 18+](https://nodejs.org/) and npm 9+
 
 ## Getting Started
-- Make sure you have configured your authentication with the XLTS.dev registry by supplying your token in the `.npmrc` file in your user home directory.
 
-  > **Note**
-  > If you don't have a token for the XLTS.dev registry, you can use the LTS AngularJS packages - see the next section.
+### Install dependencies
 
-- Clone repository: `git clone https://github.com/xlts-dev/angularjs-asp-net48-mvc5.git`.
-- Switch to the project's directory: `cd angularjs-asp-net48-mvc5`.
-- Install npm packages: `npm install`.
-- Open the project in Visual Studio.
-- Run the project by pressing the `F5` key or using the green start button in the toolbar. This will launch your web
-  browser and display the web application.
+```bash
+npm install
+dotnet restore
+```
 
-## AngularJS LTS packages
-If you want to use the LTS packages, you have to run `npm run switch-to-lts-packages` script instead of `npm install`.
+### Build the Angular frontend
+
+```bash
+npx ng build
+```
+
+This outputs the compiled Angular app to `Content/app/browser/`.
+
+### Run the application
+
+```bash
+dotnet run
+```
+
+The app will start at `https://localhost:5001` (or `http://localhost:5000`).
+
+### Run tests
+
+```bash
+# .NET unit & integration tests
+dotnet test
+
+# Angular unit tests
+npm test
+```
+
+## Docker
+
+### Build and run with Docker Compose
+
+```bash
+docker compose up --build
+```
+
+The app will be available at `http://localhost:8080`.
+
+### Build the Docker image directly
+
+```bash
+docker build -t angularjs-aspnet .
+docker run -p 8080:8080 angularjs-aspnet
+```
+
+## Terraform (AWS ECS Fargate)
+
+Infrastructure as Code is in the `terraform/` directory. It provisions:
+
+- VPC with public and private subnets across two AZs
+- NAT Gateway for private subnet internet access
+- Application Load Balancer (ALB) with HTTP listener
+- ECR repository for container images
+- ECS Fargate cluster, task definition, and service
+- CloudWatch log group for container logs
+- IAM roles for ECS task execution
+
+### Deploy
+
+```bash
+cd terraform
+terraform init
+terraform plan
+terraform apply
+```
+
+### Configuration
+
+Edit `terraform/variables.tf` to customize:
+
+| Variable | Default | Description |
+|---|---|---|
+| `aws_region` | `us-east-1` | AWS region |
+| `app_name` | `angularjs-aspnet` | Resource naming prefix |
+| `task_cpu` | `256` | Fargate CPU units |
+| `task_memory` | `512` | Fargate memory (MiB) |
+| `desired_count` | `2` | Number of ECS tasks |
+
+## Project Structure
+
+```
+.
+├── Configuration/          # Options pattern settings classes
+├── Controllers/            # ASP.NET Core MVC controllers
+├── Views/                  # Razor views
+├── Content/                # Static files (Angular build output)
+├── src/                    # Angular source code
+├── Tests/                  # xUnit test project
+├── terraform/              # AWS ECS Fargate IaC
+├── Program.cs              # ASP.NET Core entry point
+├── appsettings.json        # Application configuration
+├── Dockerfile              # Multi-stage container build
+├── docker-compose.yml      # Local container orchestration
+└── angularjs-asp-net48-mvc5.csproj  # SDK-style project file (net8.0)
+```
+
+## Migration Notes
+
+This project was migrated from:
+- .NET Framework 4.8 → .NET 8
+- ASP.NET MVC 5 → ASP.NET Core MVC
+- `Web.config` → `appsettings.json` + Options pattern
+- `System.Web` → `Microsoft.AspNetCore`
+- `packages.config` → SDK-style PackageReference
+- `Microsoft.AspNet.Web.Optimization` bundling → Angular CLI build
+- `Global.asax` → `Program.cs` minimal hosting

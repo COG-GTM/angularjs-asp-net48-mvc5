@@ -1,34 +1,87 @@
-# AngularJS with .NET Framework
-A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
+# Angular + ASP.NET MVC 5
+
+A modern Angular SPA hosted in ASP.NET MVC 5 on .NET Framework 4.8.
 
 ## Features
 
-- XLTS for AngularJS - installed using npm
-- jQuery 3.6.3 - installed using npm
-- .NET Framework 4.8
-- ASP.NET MVC 5
-- Bundling using [Microsoft.AspNet.Web.Optimization](https://docs.microsoft.com/en-us/aspnet/mvc/overview/performance/bundling-and-minification)
+- **Angular 21** single-page application with standalone components and lazy-loaded routes
+- **ASP.NET MVC 5** on .NET Framework 4.8 serving the Angular build output
+- **Web API 2** JSON endpoints (e.g. `GET /api/sample`)
+- **Playwright** end-to-end tests with TypeScript and multi-browser coverage (Chromium, Firefox, WebKit, mobile viewports)
+- **Angular CLI** unit tests with Vitest
+- **GitHub Actions CI** pipeline for automated build and test
 
 ## Prerequisites
 
-- Windows 10/11 - Older versions of Windows may work but have not been tested.
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) - The free *Community Edition* is sufficient.
-Older versions of Visual Studio may work but have not been tested.
-- [.Net Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework) - This can optionally be installed
-as part of the Visual Studio 2022 installation as well.
+- [Node.js](https://nodejs.org/) >= 18 and npm >= 9
+- [.NET Framework 4.8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework) (Windows) or [Mono](https://www.mono-project.com/) (Linux/macOS)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (optional, for Windows development)
 
 ## Getting Started
-- Make sure you have configured your authentication with the XLTS.dev registry by supplying your token in the `.npmrc` file in your user home directory.
 
-  > **Note**
-  > If you don't have a token for the XLTS.dev registry, you can use the LTS AngularJS packages - see the next section.
+```bash
+# Clone the repository
+git clone https://github.com/COG-GTM/angularjs-asp-net48-mvc5.git
+cd angularjs-asp-net48-mvc5
 
-- Clone repository: `git clone https://github.com/xlts-dev/angularjs-asp-net48-mvc5.git`.
-- Switch to the project's directory: `cd angularjs-asp-net48-mvc5`.
-- Install npm packages: `npm install`.
-- Open the project in Visual Studio.
-- Run the project by pressing the `F5` key or using the green start button in the toolbar. This will launch your web
-  browser and display the web application.
+# Install npm dependencies
+npm install
 
-## AngularJS LTS packages
-If you want to use the LTS packages, you have to run `npm run switch-to-lts-packages` script instead of `npm install`.
+# Build the Angular frontend
+npx ng build
+
+# Restore NuGet packages and build the .NET backend
+nuget restore angularjs-asp-net48-mvc5.sln
+# Windows: msbuild angularjs-asp-net48-mvc5.sln
+# Linux/macOS: xbuild angularjs-asp-net48-mvc5.sln
+```
+
+On Windows, open the solution in Visual Studio and press F5 to run with IIS Express.
+
+## Running Unit Tests
+
+```bash
+npx ng test
+```
+
+## Running E2E Tests
+
+```bash
+# Install Playwright browsers (first time only)
+npx playwright install --with-deps
+
+# Run E2E tests (requires the app running on localhost:51267, or set BASE_URL)
+BASE_URL=http://localhost:4200/ npx playwright test
+```
+
+## Project Structure
+
+```
+src/app/                  Angular application source
+  app.ts                  Root component (standalone)
+  app.routes.ts           Client-side route definitions
+  app.html / app.css      Root component template and styles
+  components/             Feature components (TestComponent, TestDirectiveComponent)
+Controllers/              ASP.NET MVC controllers
+  LandingController.cs    Serves the SPA shell
+  Api/                    Web API controllers
+    SampleApiController.cs  Sample JSON endpoint
+App_Start/                ASP.NET configuration
+  RouteConfig.cs          MVC routes + SPA catch-all
+  WebApiConfig.cs         Web API route registration
+Views/Landing/Index.cshtml  Razor view hosting the Angular app
+e2e/                      Playwright E2E tests (TypeScript)
+  tests/                  Test specs
+  pages/                  Page Object Models
+.github/workflows/ci.yml  GitHub Actions CI pipeline
+```
+
+## API Endpoints
+
+| Method | URL           | Description                    |
+|--------|---------------|--------------------------------|
+| GET    | `/api/sample` | Returns sample technology data |
+
+## License
+
+[MIT](LICENSE)

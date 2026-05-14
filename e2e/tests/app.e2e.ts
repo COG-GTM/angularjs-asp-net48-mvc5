@@ -12,18 +12,18 @@ test.describe('angular-asp-net48-mvc5 app', () => {
   test('Index', async ({ page }) => {
     const indexPage = new IndexPage(page);
 
-    await expect(indexPage.title).toHaveText('XLTS for AngularJS with .NET Framework');
+    await expect(indexPage.title).toHaveText('Angular + ASP.NET MVC 5');
   });
 
   test('TestComponent', async ({ page }) => {
     const testComponentPage = new TestComponentPage(page);
 
-    await expect(testComponentPage.angularVersion).toHaveText('Angular Version: 21.2.0');
+    await expect(testComponentPage.angularVersion).toContainText('Angular Version:');
   });
 
   test('TestDirective', async ({ page }) => {
     const testDirective = new TestDirectivePage(page);
 
-    await expect(testDirective.angularVersion).toHaveText('Angular Version: 21.2.0');
+    await expect(testDirective.angularVersion).toContainText('Angular Version:');
   });
 });

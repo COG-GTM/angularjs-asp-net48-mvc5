@@ -1,6 +1,39 @@
 # AngularJS with .NET Framework
 A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
 
+## React App (Migrated)
+
+The Angular frontend has been migrated to React 19 + TypeScript + Vite. The React app is in the `react-app/` directory.
+
+### Quick Start (React)
+
+```bash
+cd react-app
+npm install
+npm run dev      # Dev server at http://localhost:3007
+npm run build    # Production build
+npm test         # Run Vitest tests
+npm run lint     # ESLint
+```
+
+### Project Structure
+
+```
+react-app/
+├── src/
+│   ├── components/    # TestComponent, TestDirective
+│   ├── pages/         # Landing page
+│   ├── styles/        # Global CSS
+│   ├── App.tsx        # Router setup
+│   └── main.tsx       # Entry point
+├── public/            # Static assets
+└── index.html
+```
+
+## Original .NET Backend
+
+The ASP.NET MVC 5 backend remains unchanged. See below for the original setup.
+
 ## Features
 
 - XLTS for AngularJS - installed using npm

@@ -1,34 +1,70 @@
-# AngularJS with .NET Framework
-A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
+# React with .NET Framework
+
+A demo project using React + TypeScript (built with Vite), .NET Framework 4.8, and ASP.NET MVC 5.
+
+> The frontend was migrated from Angular to React + TypeScript + Vite. The
+> ASP.NET MVC 5 backend is unchanged: it serves the single-page app shell from
+> `Views/Landing/Index.cshtml`, which loads the built assets from
+> `Content/app/browser/`.
 
 ## Features
 
-- XLTS for AngularJS - installed using npm
-- jQuery 3.6.3 - installed using npm
+- React 18 + TypeScript - frontend SPA
+- Vite - dev server and production bundler
 - .NET Framework 4.8
 - ASP.NET MVC 5
-- Bundling using [Microsoft.AspNet.Web.Optimization](https://docs.microsoft.com/en-us/aspnet/mvc/overview/performance/bundling-and-minification)
+- Playwright end-to-end tests (Page Object Model)
+
+## Architecture
+
+- The React app lives in [`react-app/`](./react-app).
+- `npm run build` (from `react-app/`) bundles the SPA into `Content/app/browser/`
+  as `main.js` (a classic, non-module script) and `styles.css`.
+- ASP.NET MVC route `""` -> `LandingController.Index` -> `Views/Landing/Index.cshtml`,
+  which references `~/Content/app/browser/styles.css` and `~/Content/app/browser/main.js`
+  and contains the `<app-root></app-root>` mount element. React mounts into `<app-root>`.
 
 ## Prerequisites
 
-- Windows 10/11 - Older versions of Windows may work but have not been tested.
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) - The free *Community Edition* is sufficient.
-Older versions of Visual Studio may work but have not been tested.
-- [.Net Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework) - This can optionally be installed
-as part of the Visual Studio 2022 installation as well.
+- [Node.js](https://nodejs.org/) 18+ (verified on Node 20; see `.nvmrc`).
+- For running the ASP.NET MVC host on Windows:
+  - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (the free *Community Edition* is sufficient).
+  - [.NET Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework).
 
-## Getting Started
-- Make sure you have configured your authentication with the XLTS.dev registry by supplying your token in the `.npmrc` file in your user home directory.
+## Getting Started (frontend)
 
-  > **Note**
-  > If you don't have a token for the XLTS.dev registry, you can use the LTS AngularJS packages - see the next section.
+```bash
+cd react-app
+npm install        # install dependencies
+npm run dev        # start the Vite dev server (http://localhost:51267)
+```
 
-- Clone repository: `git clone https://github.com/xlts-dev/angularjs-asp-net48-mvc5.git`.
-- Switch to the project's directory: `cd angularjs-asp-net48-mvc5`.
-- Install npm packages: `npm install`.
-- Open the project in Visual Studio.
-- Run the project by pressing the `F5` key or using the green start button in the toolbar. This will launch your web
-  browser and display the web application.
+### Build the SPA for ASP.NET to serve
 
-## AngularJS LTS packages
-If you want to use the LTS packages, you have to run `npm run switch-to-lts-packages` script instead of `npm install`.
+```bash
+cd react-app
+npm run build      # outputs to ../Content/app/browser (main.js + styles.css)
+```
+
+Then open the solution in Visual Studio and run it (press `F5`). ASP.NET MVC
+serves `Views/Landing/Index.cshtml`, which loads the built React assets.
+
+### Lint
+
+```bash
+cd react-app
+npm run lint
+```
+
+### End-to-end tests (Playwright)
+
+```bash
+cd react-app
+npx playwright install chromium   # first time only
+npm run e2e                       # starts the dev server and runs the specs
+```
+
+## Continuous Integration
+
+`.github/workflows/react-ci.yml` lints, builds, and runs the Playwright E2E
+tests for the React app on every push/PR to `main`.

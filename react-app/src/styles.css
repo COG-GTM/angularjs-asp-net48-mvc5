@@ -1,0 +1,9 @@
+/* Global styles (migrated from src/styles.css, which was empty). */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}

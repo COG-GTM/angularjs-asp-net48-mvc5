@@ -103,13 +103,7 @@
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="LICENSE" />
-    <Content Include="WebApp\Components\test.component.css" />
-    <Content Include="WebApp\Components\test.component.js" />
-    <Content Include="WebApp\Directives\test.directive.html" />
-    <Content Include="WebApp\Directives\test.directive.js" />
-    <Content Include="WebApp\app.js" />
     <Content Include="Web.config" />
-    <Content Include="WebApp\Directives\test.directive.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />

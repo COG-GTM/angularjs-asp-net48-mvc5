@@ -1,0 +1,12 @@
+.error {
+  padding: 1rem 1.5rem;
+  margin: 1rem;
+  border-left: 4px solid var(--hot-red);
+  background: color-mix(in srgb, var(--hot-red) 8%, transparent);
+  border-radius: 4px;
+
+  p {
+    margin: 0;
+    color: var(--gray-900);
+  }
+}

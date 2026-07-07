@@ -4,11 +4,13 @@ import { SettingsProvider, useSettings } from './context/SettingsContext';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
+import { usePageTracking } from './hooks/usePageTracking';
 
 const Home = lazy(() => import('./pages/Home/Home'));
 
 function AppShell() {
   const { resolvedTheme } = useSettings();
+  usePageTracking();
 
   return (
     <div className={`app-root theme-${resolvedTheme}`}>

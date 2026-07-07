@@ -1,8 +1,35 @@
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { SettingsProvider, useSettings } from './context/SettingsContext';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Loader from './components/Loader/Loader';
+
+const Home = lazy(() => import('./pages/Home/Home'));
+
+function AppShell() {
+  const { resolvedTheme } = useSettings();
+
+  return (
+    <div className={`app-root theme-${resolvedTheme}`}>
+      <Header />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+      <Footer />
+    </div>
+  );
+}
+
 export default function App() {
   return (
-    <main>
-      <h1>React migration in progress</h1>
-      <p>The application shell will be built out in the following migration PRs.</p>
-    </main>
+    <BrowserRouter>
+      <SettingsProvider>
+        <AppShell />
+      </SettingsProvider>
+    </BrowserRouter>
   );
 }

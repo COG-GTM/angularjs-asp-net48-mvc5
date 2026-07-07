@@ -15,3 +15,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--gray-900);
 }
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.theme-dark {
+  --gray-900: oklch(95% 0.006 300.98);
+  --gray-700: oklch(78% 0.014 302.71);
+  --gray-400: oklch(40% 0.015 304.04);
+  background-color: oklch(15% 0.005 300);
+}
+
+.theme-light {
+  background-color: #fff;
+}

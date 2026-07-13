@@ -36,8 +36,10 @@ const config = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:51267/',
+    baseURL: 'http://localhost:5000/',
 
+    /* Record a video for every test so the HTML report embeds it as evidence. */
+    video: 'on',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     browserName: 'chromium',
@@ -97,13 +99,21 @@ const config = {
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  // outputDir: 'test-results/',
+  outputDir: 'test-results/',
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
+  /*
+   * Build the Angular front-end and start the migrated ASP.NET Core (.NET 8)
+   * app before running the tests, so the E2E run is fully self-contained.
+   */
+  webServer: {
+    command:
+      'npm run build && dotnet run --project angularjs-asp-net48-mvc5.csproj --configuration Release --urls http://localhost:5000',
+    url: 'http://localhost:5000/',
+    reuseExistingServer: !process.env.CI,
+    timeout: 180 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
+  },
 };
 
 export default config;

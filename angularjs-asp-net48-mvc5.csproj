@@ -19,4 +19,31 @@
     <Content Remove="node_modules\**\*" />
   </ItemGroup>
 
+  <!--
+    Compile the front-end together with the backend: `dotnet build`/`dotnet run`
+    installs npm deps (once) and runs the Angular CLI build before building the
+    .NET app, producing a single build for the whole application.
+    Pass -p:SkipAngularBuild=true to skip (e.g. when the FE was already built).
+  -->
+  <PropertyGroup>
+    <NpmInstallStamp>node_modules/.install-stamp</NpmInstallStamp>
+  </PropertyGroup>
+
+  <Target Name="NpmInstall"
+          Condition="'$(SkipAngularBuild)' != 'true'"
+          Inputs="package.json;package-lock.json"
+          Outputs="$(NpmInstallStamp)">
+    <Message Importance="high" Text="[FE] Installing npm dependencies..." />
+    <Exec Command="npm install" />
+    <Touch Files="$(NpmInstallStamp)" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="BuildAngular"
+          Condition="'$(SkipAngularBuild)' != 'true'"
+          DependsOnTargets="NpmInstall"
+          BeforeTargets="BeforeBuild">
+    <Message Importance="high" Text="[FE] Building Angular front-end (npm run build)..." />
+    <Exec Command="npm run build" />
+  </Target>
+
 </Project>

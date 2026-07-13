@@ -28,10 +28,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Build Angular front-end
-        run: npm run build
-
-      - name: Build ASP.NET Core (.NET 8) app
+      - name: Build front-end + back-end together (.NET 8)
+        # The csproj BuildAngular target runs `npm run build` before compiling
+        # the .NET app, so this single command compiles the whole application.
         run: dotnet build angularjs-asp-net48-mvc5.csproj --configuration Release
 
       - name: Install Playwright browsers

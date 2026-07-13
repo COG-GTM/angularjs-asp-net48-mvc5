@@ -102,12 +102,13 @@ const config = {
   outputDir: 'test-results/',
 
   /*
-   * Build the Angular front-end and start the migrated ASP.NET Core (.NET 8)
-   * app before running the tests, so the E2E run is fully self-contained.
+   * Start the migrated ASP.NET Core (.NET 8) app before running the tests, so
+   * the E2E run is fully self-contained. `dotnet run` compiles the Angular
+   * front-end together with the backend (see the csproj BuildAngular target).
    */
   webServer: {
     command:
-      'npm run build && dotnet run --project angularjs-asp-net48-mvc5.csproj --configuration Release --urls http://localhost:5000',
+      'dotnet run --project angularjs-asp-net48-mvc5.csproj --configuration Release --urls http://localhost:5000',
     url: 'http://localhost:5000/',
     reuseExistingServer: !process.env.CI,
     timeout: 180 * 1000,

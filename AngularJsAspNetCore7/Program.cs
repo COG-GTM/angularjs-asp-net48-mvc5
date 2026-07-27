@@ -26,13 +26,20 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 // The AngularJS and jQuery assets are installed with npm at the repository root, outside of wwwroot.
+// Only the packages the SPA loads are mounted, so the rest of node_modules stays unreachable.
 var nodeModulesPath = Path.GetFullPath(Path.Combine(app.Environment.ContentRootPath, "..", "node_modules"));
-if (Directory.Exists(nodeModulesPath))
+foreach (var package in new[] { "angular", "jquery/dist" })
 {
+    var packagePath = Path.Combine(nodeModulesPath, package);
+    if (!Directory.Exists(packagePath))
+    {
+        continue;
+    }
+
     app.UseStaticFiles(new StaticFileOptions
     {
-        FileProvider = new PhysicalFileProvider(nodeModulesPath),
-        RequestPath = "/node_modules"
+        FileProvider = new PhysicalFileProvider(packagePath),
+        RequestPath = $"/node_modules/{package}"
     });
 }
 

@@ -33,7 +33,8 @@
     "e2e:debug": "playwright test --project chromium --headed",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html}\"",
     "update": "ncu -u",
-    "prepare": "npx playwright install"
+    "prepare": "npx playwright install",
+    "test:coverage": "ng test --coverage --coverage-reporters html --coverage-reporters text"
   },
   "engines": {
     "node": ">=18",
@@ -55,6 +56,7 @@
     "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.2.0",
     "@playwright/test": "^1.30.0",
+    "@vitest/coverage-v8": "^4.1.11",
     "jsdom": "^28.0.0",
     "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.3",

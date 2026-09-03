@@ -1,0 +1,17 @@
+@use './variables' as *;
+
+.theme-light {
+  --color-text: #{$color-text};
+  --color-text-muted: #{$color-text-muted};
+  --color-background: #{$color-background};
+  --color-surface: #{$color-surface};
+  --color-border: #{$color-border};
+}
+
+.theme-dark {
+  --color-text: #{$color-text-dark};
+  --color-text-muted: #{$color-text-muted-dark};
+  --color-background: #{$color-background-dark};
+  --color-surface: #{$color-surface-dark};
+  --color-border: #{$color-border-dark};
+}

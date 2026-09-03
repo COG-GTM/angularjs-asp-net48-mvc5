@@ -18,6 +18,15 @@ namespace asp_net_angularjs
                 url: "",
                 defaults: new { controller = "Landing", action = "Index", id = UrlParameter.Optional }
             );
+
+            // Client-side routes are resolved by React Router, so every request that
+            // does not match a file on disk is served by the SPA host view.
+            routes.MapRoute(
+                name: "SpaFallback",
+                url: "{*clientRoute}",
+                defaults: new { controller = "Landing", action = "Index" },
+                constraints: new { clientRoute = new SpaRouteConstraint() }
+            );
         }
     }
 }

@@ -1,5 +1,7 @@
 # AngularJS Migration Audit Inventory
 
+> **Historical document.** This inventory describes the AngularJS code before the migration (PRs #56–#61). None of the `WebApp/` files, `ng-app` bootstrap or bundles it lists exist on `main` any more; see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the current architecture.
+
 > **Generated**: 2026-03-03
 > **Purpose**: Document every AngularJS building block in this codebase that needs to be migrated to modern Angular.
 > **Scope**: Full codebase scan of `WebApp/`, `Views/`, `App_Start/`, and all other directories.

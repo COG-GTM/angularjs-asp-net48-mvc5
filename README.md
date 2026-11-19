@@ -1,13 +1,28 @@
-# AngularJS with .NET Framework
-A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
+# Angular with .NET Framework
+A demo project that serves an Angular 21 app from an ASP.NET MVC 5 site on .NET Framework 4.8. It started as an AngularJS + jQuery app; the AngularJS code and ASP.NET script bundling have been replaced by an Angular CLI build.
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pieces fit together, with a [diagram](docs/diagrams/architecture.png) ([Graphviz source](docs/diagrams/architecture.dot)).
+
+![Architecture diagram](docs/diagrams/architecture.png)
 
 ## Features
 
-- XLTS for AngularJS - installed using npm
-- jQuery 3.6.3 - installed using npm
+- Angular 21 (Angular CLI workspace in `src/`, NgModule bootstrap via `AppModule`)
 - .NET Framework 4.8
-- ASP.NET MVC 5
-- Bundling using [Microsoft.AspNet.Web.Optimization](https://docs.microsoft.com/en-us/aspnet/mvc/overview/performance/bundling-and-minification)
+- ASP.NET MVC 5 host page (`Views/Landing/Index.cshtml`) that loads the Angular CLI build output from `Content/app/browser/`
+- Unit tests with `ng test` (Vitest) and end-to-end tests with Playwright
+
+## Project layout
+
+| Path | Contents |
+|------|----------|
+| `src/` | Angular app: `main.ts`, `app/` (`AppModule`, `App`), `app/components/` |
+| `angular.json` | Angular CLI config; builds to `Content/app/` |
+| `Content/app/browser/` | `ng build` output served by the MVC site (git-ignored) |
+| `App_Start/`, `Controllers/`, `Views/`, `Global.asax` | ASP.NET MVC 5 startup, root route, `LandingController` and the host view |
+| `e2e/` | Playwright tests and page objects |
+| `docs/` | Architecture doc and diagram |
+| `MIGRATION_AUDIT.md` | Historical inventory of the AngularJS code before the migration |
 
 ## Prerequisites
 
@@ -16,19 +31,23 @@ A demo project using AngularJS, .NET Framework 4.8, and ASP.NET MVC 5.
 Older versions of Visual Studio may work but have not been tested.
 - [.Net Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework) - This can optionally be installed
 as part of the Visual Studio 2022 installation as well.
+- [Node.js](https://nodejs.org/) 20.19+ or 22.12+ (required by Angular 21) and npm.
 
 ## Getting Started
-- Make sure you have configured your authentication with the XLTS.dev registry by supplying your token in the `.npmrc` file in your user home directory.
-
-  > **Note**
-  > If you don't have a token for the XLTS.dev registry, you can use the LTS AngularJS packages - see the next section.
-
-- Clone repository: `git clone https://github.com/xlts-dev/angularjs-asp-net48-mvc5.git`.
+- Clone repository: `git clone https://github.com/COG-GTM/angularjs-asp-net48-mvc5.git`.
 - Switch to the project's directory: `cd angularjs-asp-net48-mvc5`.
 - Install npm packages: `npm install`.
-- Open the project in Visual Studio.
-- Run the project by pressing the `F5` key or using the green start button in the toolbar. This will launch your web
-  browser and display the web application.
+- Build the Angular app into `Content/app/browser/`: `npm run build` (or `npm run watch` to rebuild on change).
+- Open the project in Visual Studio. NuGet packages are restored from `packages.config` on first build.
+- Run the project by pressing the `F5` key or using the green start button in the toolbar. IIS Express serves the site
+  at `http://localhost:51267/` and opens it in your browser.
 
-## AngularJS LTS packages
-If you want to use the LTS packages, you have to run `npm run switch-to-lts-packages` script instead of `npm install`.
+## Scripts
+
+| Command | What it does |
+|---------|--------------|
+| `npm run build` | Production build to `Content/app/browser/` |
+| `npm run watch` | Development build in watch mode |
+| `npm start` | Angular dev server on `http://localhost:4200/` (Angular only, without the MVC host page) |
+| `npm test` | Unit tests (`ng test`) |
+| `npm run e2e` | Playwright tests against the running site on `http://localhost:51267/` |

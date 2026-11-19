@@ -1,0 +1,48 @@
+// Architecture of angularjs-asp-net48-mvc5 as it runs on `main`.
+// Edit this file, then run ./render.sh to regenerate architecture.png and architecture.svg.
+digraph architecture {
+  graph [rankdir=TB, fontname="DejaVu Sans", fontsize=18, labelloc=t, nodesep=0.5, ranksep=0.6, pad=0.3,
+         label="angularjs-asp-net48-mvc5: ASP.NET MVC 5 host page + Angular 21 CLI bundle"];
+  node  [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=16, fillcolor=white, color="#555555"];
+  edge  [fontname="DejaVu Sans", fontsize=14, color="#444444"];
+
+  browser [label="Browser\nhttp://localhost:51267/", shape=oval, fillcolor="#e8f0fe"];
+
+  subgraph cluster_mvc {
+    label="IIS Express :51267  ·  ASP.NET MVC 5 on .NET Framework 4.8"; fontsize=16; style="rounded,filled"; fillcolor="#f3f6fb"; color="#7a8fb5";
+    global  [label="Global.asax.cs  Application_Start\nRouteConfig.RegisterRoutes\nBundleConfig.RegisterBundles (empty)"];
+    route   [label="Route \"Landing\"  url: \"\"\n→ LandingController.Index()"];
+    view    [label="Views/Landing/Index.cshtml  (Layout = null)\n<app-root> + ~/Content/app/browser/main.js\n+ ~/Content/app/browser/styles.css"];
+    static  [label="Static files\nContent/app/browser/*\n(gitignored build output)", fillcolor="#fff7e0"];
+    {rank=same; route; static;}
+  }
+
+  subgraph cluster_ng {
+    label="Angular 21 app (src/), runs in the browser"; fontsize=16; style="rounded,filled"; fillcolor="#fdf1f4"; color="#c07a8f";
+    main    [label="src/main.ts\nplatformBrowserDynamic().bootstrapModule(AppModule)"];
+    module  [label="AppModule (app.module.ts)\nBrowserModule · RouterModule.forRoot(routes = [])"];
+    app     [label="App  <app-root>  (standalone: false)\napp.html: Angular CLI placeholder + <router-outlet/>"];
+    unused  [label="TestComponent <app-test>\nTestDirectiveComponent <app-test-directive>\nimported, not placed in any template", fillcolor="#eeeeee", style="rounded,filled,dashed"];
+    {rank=same; app; unused;}
+  }
+
+  subgraph cluster_build {
+    label="Node.js tooling (package.json, angular.json)"; fontsize=16; style="rounded,filled"; fillcolor="#eef7ee"; color="#7fae7f";
+    ngbuild [label="npm run build  (ng build)\n@angular/build:application\noutputPath Content/app, outputHashing none"];
+    ngserve [label="npm start  (ng serve :4200)\nserves src/index.html, no MVC"];
+    tests   [label="npm test  (ng test, Vitest + jsdom)\nnpm run e2e  (Playwright → :51267)"];
+    {rank=same; ngbuild; ngserve; tests;}
+  }
+
+  browser -> global  [label="GET /"];
+  global  -> route;
+  route   -> view    [label="View()"];
+  view    -> browser [label="HTML", style=dashed, constraint=false];
+  browser -> static  [label="GET main.js, styles.css", constraint=false];
+  static  -> main    [label="loads"];
+  main    -> module;
+  module  -> app     [label="bootstrap"];
+  module  -> unused  [label="imports", style=dashed];
+  ngbuild -> static  [label="writes", style=bold, color="#2e7d32"];
+  ngbuild -> main    [label="compiles src/", color="#2e7d32"];
+}

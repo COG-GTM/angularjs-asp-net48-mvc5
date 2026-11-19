@@ -164,15 +164,15 @@
 <!-- ngbuild&#45;&gt;static -->
 <g id="edge10" class="edge">
 <title>ngbuild&#45;&gt;static</title>
-<path fill="none" stroke="#2e7d32" stroke-width="2" d="M1361.05,-477.35C1346.51,-475.03 1332.01,-472.88 1318,-471 1026.53,-431.96 680.33,-407.2 508.64,-396.35"/>
-<polygon fill="#2e7d32" stroke="#2e7d32" stroke-width="2" points="1360.68,-480.83 1371.11,-478.97 1361.79,-473.92 1360.68,-480.83"/>
+<path fill="none" stroke="#2e7d32" stroke-width="2" d="M1371.11,-478.97C1353.23,-476.04 1335.25,-473.31 1318,-471 1032.08,-432.71 693.49,-408.14 518.64,-396.99"/>
+<polygon fill="#2e7d32" stroke="#2e7d32" stroke-width="2" points="518.84,-393.49 508.64,-396.35 518.4,-400.48 518.84,-393.49"/>
 <text text-anchor="middle" x="1214.5" y="-445.8" font-family="DejaVu Sans" font-size="14.00">writes</text>
 </g>
 <!-- ngbuild&#45;&gt;main -->
 <g id="edge11" class="edge">
 <title>ngbuild&#45;&gt;main</title>
-<path fill="none" stroke="#2e7d32" d="M1471.72,-473.68C1385.79,-420.68 1226.13,-322.22 1156.25,-279.12"/>
-<polygon fill="#2e7d32" stroke="#2e7d32" points="1469.96,-476.7 1480.31,-478.97 1473.64,-470.74 1469.96,-476.7"/>
+<path fill="none" stroke="#2e7d32" d="M1480.31,-478.97C1400.12,-429.52 1241.55,-331.73 1165.15,-284.61"/>
+<polygon fill="#2e7d32" stroke="#2e7d32" points="1166.6,-281.39 1156.25,-279.12 1162.92,-287.35 1166.6,-281.39"/>
 <text text-anchor="middle" x="1424.5" y="-385.3" font-family="DejaVu Sans" font-size="14.00">compiles src/</text>
 </g>
 <!-- ngserve -->

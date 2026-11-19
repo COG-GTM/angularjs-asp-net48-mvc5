@@ -43,6 +43,6 @@ digraph architecture {
   main    -> module;
   module  -> app     [label="bootstrap"];
   module  -> unused  [label="imports", style=dashed];
-  ngbuild -> static  [label="writes", dir=back, style=bold, color="#2e7d32"];
-  ngbuild -> main    [label="compiles src/", dir=back, color="#2e7d32"];
+  ngbuild -> static  [label="writes", style=bold, color="#2e7d32"];
+  ngbuild -> main    [label="compiles src/", color="#2e7d32"];
 }
